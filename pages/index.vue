@@ -6,29 +6,32 @@
         nuxt-fundamentals
       </h1>
       <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
+        <nuxt-link
+          v-for="post in posts"
+          :to="{ name: 'posts-id', params: { id: post.id } }"
+          :key="post.id"
           class="button--grey"
         >
-          GitHub
-        </a>
+          {{ post.title }}
+        </nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  head() {
+    return {
+      title: "Nuxt Fundamentals"
+    };
+  },
+  computed: {
+    posts() {
+      return this.$store.state.posts.all;
+    }
+  }
+};
 </script>
 
 <style scoped>
